@@ -1,5 +1,10 @@
 # Advanced Machine Learning Pipeline
 
+## 🖼️ Hero Image
+
+![Hero Image](outputs/hero_image.png)
+
+
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
 ![Scikit-learn](https://img.shields.io/badge/Scikit--learn-F7931E?style=flat&logo=scikit-learn&logoColor=white)
 ![Pandas](https://img.shields.io/badge/Pandas-150458?style=flat&logo=pandas&logoColor=white)
@@ -8,13 +13,25 @@
 ![Seaborn](https://img.shields.io/badge/Seaborn-3776AB?style=flat&logo=python&logoColor=white)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
+An advanced Machine Learning Pipeline that automates the entire ML workflow, from data preprocessing to model evaluation. This project demonstrates advanced data science techniques including automated exploratory analysis, feature engineering, model comparison, and hyperparameter optimization.
+
 Pipeline avançado de Machine Learning que automatiza todo o fluxo de trabalho ML, desde o pré-processamento de dados até a avaliação de modelos. Este projeto demonstra técnicas avançadas de ciência de dados incluindo análise exploratória automatizada, engenharia de features, comparação de modelos e otimização de hiperparâmetros.
 
-## 🎯 Visão Geral
+## 🎯 Overview / Visão Geral
+
+A complete Machine Learning system that implements industry best practices for predictive model development, offering end-to-end automation with exploratory analysis, feature engineering, training of multiple algorithms, and robust performance evaluation.
 
 Sistema completo de Machine Learning que implementa as melhores práticas da indústria para desenvolvimento de modelos preditivos, oferecendo automação end-to-end com análise exploratória, feature engineering, treinamento de múltiplos algoritmos e avaliação robusta de performance.
 
-### ✨ Características Principais
+### ✨ Key Features / Características Principais
+
+- **🔍 Automated EDA**: Comprehensive exploratory analysis with professional visualizations
+- **⚙️ Feature Engineering**: Automatic feature selection and transformation
+- **🤖 Model Comparison**: Multiple algorithms (Random Forest, Gradient Boosting, Logistic Regression, SVM)
+- **📊 Cross-Validation**: Robust evaluation with k-fold cross-validation
+- **🎛️ Hyperparameter Optimization**: Automatic search with GridSearchCV
+- **📈 Professional Visualizations**: Performance graphs and data insights
+- **💾 Model Persistence**: Saving and loading of trained models
 
 - **🔍 EDA Automatizada**: Análise exploratória abrangente com visualizações profissionais
 - **⚙️ Feature Engineering**: Seleção e transformação automática de features
@@ -24,181 +41,185 @@ Sistema completo de Machine Learning que implementa as melhores práticas da ind
 - **📈 Visualizações Profissionais**: Gráficos de performance e insights dos dados
 - **💾 Persistência de Modelos**: Salvamento e carregamento de modelos treinados
 
-## 🛠️ Stack Tecnológico
+## 🛠️ Technology Stack / Stack Tecnológico
 
-### Core Libraries
-- **Python 3.11**: Linguagem principal
-- **Scikit-learn**: Framework de Machine Learning
-- **Pandas**: Manipulação e análise de dados
-- **NumPy**: Computação numérica
+### Core Libraries / Bibliotecas Principais
+- **Python 3.11**: Main language / Linguagem principal
+- **Scikit-learn**: Machine Learning Framework / Framework de Machine Learning
+- **Pandas**: Data manipulation and analysis / Manipulação e análise de dados
+- **NumPy**: Numerical computation / Computação numérica
 
-### Visualization & Analysis
-- **Matplotlib**: Visualizações estáticas
-- **Seaborn**: Visualizações estatísticas
-- **Plotly**: Gráficos interativos (opcional)
+### Visualization & Analysis / Visualização e Análise
+- **Matplotlib**: Static visualizations / Visualizações estáticas
+- **Seaborn**: Statistical visualizations / Visualizações estatísticas
+- **Plotly**: Interactive charts (optional) / Gráficos interativos (opcional)
 
-### Model Development
-- **Random Forest**: Ensemble de árvores de decisão
-- **Gradient Boosting**: Boosting sequencial
-- **Logistic Regression**: Regressão logística
-- **Support Vector Machine**: Máquinas de vetores de suporte
+### Model Development / Desenvolvimento de Modelos
+- **Random Forest**: Ensemble of decision trees / Ensemble de árvores de decisão
+- **Gradient Boosting**: Sequential boosting / Boosting sequencial
+- **Logistic Regression**: Logistic regression / Regressão logística
+- **Support Vector Machine**: Support vector machines / Máquinas de vetores de suporte
 
-## 📁 Estrutura do Projeto
+## 📁 Project Structure / Estrutura do Projeto
 
 ```
 Advanced-ML-Pipeline/
-├── ml_pipeline.py              # Pipeline principal
-├── requirements.txt            # Dependências do projeto
-├── README.md                   # Documentação
-├── .gitignore                  # Arquivos ignorados pelo Git
-├── data/                       # Dados de entrada (opcional)
-├── outputs/                    # Resultados gerados
-│   ├── eda_analysis.png        # Visualizações EDA
-│   ├── model_evaluation.png    # Comparação de modelos
-│   ├── feature_importance.png  # Importância das features
-│   └── best_model.pkl          # Melhor modelo salvo
-├── notebooks/                  # Jupyter notebooks (opcional)
-└── tests/                      # Testes unitários
+├── ml_pipeline.py              # Main pipeline / Pipeline principal
+├── requirements.txt            # Project dependencies / Dependências do projeto
+├── README.md                   # Documentation / Documentação
+├── .gitignore                  # Git ignored files / Arquivos ignorados pelo Git
+├── data/                       # Input data (optional) / Dados de entrada (opcional)
+├── outputs/                    # Generated results / Resultados gerados
+│   ├── eda_analysis.png        # EDA visualizations / Visualizações EDA
+│   ├── model_evaluation.png    # Model comparison / Comparação de modelos
+│   ├── feature_importance.png  # Feature importance / Importância das features
+│   └── best_model.pkl          # Best saved model / Melhor modelo salvo
+├── notebooks/                  # Jupyter notebooks (optional) / Jupyter notebooks (opcional)
+└── tests/                      # Unit tests / Testes unitários
 ```
 
-## 🚀 Quick Start
+## 🚀 Quick Start / Início Rápido
 
-### Pré-requisitos
+### Prerequisites / Pré-requisitos
 
-- Python 3.11 ou superior
-- pip (gerenciador de pacotes Python)
+- Python 3.11 or higher / Python 3.11 ou superior
+- pip (Python package manager) / pip (gerenciador de pacotes Python)
 
-### Instalação
+### Installation / Instalação
 
-1. **Clone o repositório:**
+1. **Clone the repository:** / **Clone o repositório:**
 ```bash
 git clone https://github.com/galafis/Advanced-ML-Pipeline.git
 cd Advanced-ML-Pipeline
 ```
 
-2. **Instale as dependências:**
+2. **Install dependencies:** / **Instale as dependências:**
 ```bash
 pip install -r requirements.txt
 ```
 
-3. **Execute o pipeline:**
+3. **Execute the pipeline:** / **Execute o pipeline:**
 ```bash
 python ml_pipeline.py
 ```
 
-### Uso Básico
+### Basic Usage / Uso Básico
 
 ```python
 from ml_pipeline import MLPipeline
 import pandas as pd
 
-# Carregue seus dados
-data = pd.read_csv('your_dataset.csv')
+# Load your data / Carregue seus dados
+data = pd.read_csv(\'your_dataset.csv\')
 
-# Inicialize o pipeline
+# Initialize the pipeline / Inicialize o pipeline
 pipeline = MLPipeline()
 
-# Execute o pipeline completo
-results = pipeline.run_pipeline(data, target_column='target')
+# Execute the complete pipeline / Execute o pipeline completo
+results = pipeline.run_pipeline(data, target_column=\'target\')
 
-# Visualize os resultados
+# Visualize the results / Visualize os resultados
 pipeline.plot_results()
 ```
 
-## 🔍 Funcionalidades Detalhadas
+## 🔍 Detailed Functionalities / Funcionalidades Detalhadas
 
-### 📊 Análise Exploratória Automatizada
+### 📊 Automated Exploratory Data Analysis / Análise Exploratória Automatizada
 
 ```python
 def exploratory_data_analysis(self, data):
     """
+    Performs comprehensive exploratory data analysis
     Realiza análise exploratória abrangente dos dados
     """
-    # Estatísticas descritivas
+    # Descriptive statistics / Estatísticas descritivas
     summary_stats = data.describe()
     
-    # Análise de valores ausentes
+    # Missing values analysis / Análise de valores ausentes
     missing_analysis = data.isnull().sum()
     
-    # Distribuições das variáveis
+    # Variable distributions / Distribuições das variáveis
     self.plot_distributions(data)
     
-    # Matriz de correlação
+    # Correlation matrix / Matriz de correlação
     self.plot_correlation_matrix(data)
     
-    # Análise de outliers
+    # Outlier analysis / Análise de outliers
     outliers = self.detect_outliers(data)
     
     return {
-        'summary_stats': summary_stats,
-        'missing_values': missing_analysis,
-        'outliers': outliers
+        \'summary_stats\': summary_stats,
+        \'missing_values\': missing_analysis,
+        \'outliers\': outliers
     }
 ```
 
-### ⚙️ Feature Engineering Avançado
+### ⚙️ Advanced Feature Engineering / Engenharia de Features Avançada
 
 ```python
 def feature_engineering(self, X, y):
     """
+    Automated feature engineering
     Engenharia de features automatizada
     """
-    # Seleção de features baseada em estatísticas
-    selector = SelectKBest(score_func=f_classif, k='all')
+    # Statistical-based feature selection / Seleção de features baseada em estatísticas
+    selector = SelectKBest(score_func=f_classif, k=\'all\')
     X_selected = selector.fit_transform(X, y)
     
-    # Normalização/Padronização
+    # Normalization/Standardization / Normalização/Padronização
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X_selected)
     
-    # Criação de features polinomiais (se aplicável)
-    if X.shape[1] <= 10:  # Evitar explosão dimensional
+    # Polynomial feature creation (if applicable) / Criação de features polinomiais (se aplicável)
+    if X.shape[1] <= 10:  # Avoid dimensional explosion / Evitar explosão dimensional
         poly_features = self.create_polynomial_features(X_scaled)
         X_scaled = np.hstack([X_scaled, poly_features])
     
     return X_scaled, selector, scaler
 ```
 
-### 🤖 Comparação de Modelos
+### 🤖 Model Comparison / Comparação de Modelos
 
 ```python
 def compare_models(self, X, y):
     """
+    Compares multiple ML algorithms
     Compara múltiplos algoritmos de ML
     """
     results = {}
     
     for name, model in self.models.items():
-        # Validação cruzada
-        cv_scores = cross_val_score(model, X, y, cv=5, scoring='accuracy')
+        # Cross-validation / Validação cruzada
+        cv_scores = cross_val_score(model, X, y, cv=5, scoring=\'accuracy\')
         
-        # Treinamento e avaliação
+        # Training and evaluation / Treinamento e avaliação
         model.fit(X_train, y_train)
         y_pred = model.predict(X_test)
         
         results[name] = {
-            'cv_mean': cv_scores.mean(),
-            'cv_std': cv_scores.std(),
-            'test_accuracy': accuracy_score(y_test, y_pred),
-            'classification_report': classification_report(y_test, y_pred),
-            'confusion_matrix': confusion_matrix(y_test, y_pred)
+            \'cv_mean\': cv_scores.mean(),
+            \'cv_std\': cv_scores.std(),
+            \'test_accuracy\': accuracy_score(y_test, y_pred),
+            \'classification_report\': classification_report(y_test, y_pred),
+            \'confusion_matrix\': confusion_matrix(y_test, y_pred)
         }
     
     return results
 ```
 
-### 🎛️ Otimização de Hiperparâmetros
+### 🎛️ Hyperparameter Optimization / Otimização de Hiperparâmetros
 
 ```python
 def hyperparameter_tuning(self, model, param_grid, X, y):
     """
+    Automatic hyperparameter optimization
     Otimização automática de hiperparâmetros
     """
     grid_search = GridSearchCV(
         estimator=model,
         param_grid=param_grid,
         cv=5,
-        scoring='accuracy',
+        scoring=\'accuracy\',
         n_jobs=-1,
         verbose=1
     )
@@ -206,127 +227,129 @@ def hyperparameter_tuning(self, model, param_grid, X, y):
     grid_search.fit(X, y)
     
     return {
-        'best_params': grid_search.best_params_,
-        'best_score': grid_search.best_score_,
-        'best_estimator': grid_search.best_estimator_
+        \'best_params\': grid_search.best_params_,
+        \'best_score\': grid_search.best_score_,
+        \'best_estimator\': grid_search.best_estimator_
     }
 ```
 
-## 📊 Exemplos de Uso
+## 📊 Usage Examples / Exemplos de Uso
 
-### 1. Pipeline Completo com Dataset Iris
+### 1. Complete Pipeline with Iris Dataset / Pipeline Completo com Dataset Iris
 
 ```python
 from sklearn.datasets import load_iris
 from ml_pipeline import MLPipeline
 
-# Carregue o dataset
+# Load the dataset / Carregue o dataset
 iris = load_iris()
 data = pd.DataFrame(iris.data, columns=iris.feature_names)
-data['target'] = iris.target
+data["target"] = iris.target
 
-# Execute o pipeline
+# Execute the pipeline / Execute o pipeline
 pipeline = MLPipeline()
-results = pipeline.run_complete_pipeline(data, 'target')
+results = pipeline.run_complete_pipeline(data, "target")
 
-# Resultados
-print(f"Melhor modelo: {results['best_model_name']}")
-print(f"Acurácia: {results['best_accuracy']:.4f}")
+# Results / Resultados
+print(f"Best model: {results["best_model_name"]}")
+print(f"Accuracy: {results["best_accuracy"]:.4f}")
 ```
 
-### 2. Análise de Feature Importance
+### 2. Feature Importance Analysis / Análise de Importância de Features
 
 ```python
-# Obter importância das features
+# Get feature importance / Obter importância das features
 feature_importance = pipeline.get_feature_importance()
 
-# Plotar importância
+# Plot importance / Plotar importância
 pipeline.plot_feature_importance(feature_importance)
 ```
 
-### 3. Predições em Novos Dados
+### 3. Predictions on New Data / Predições em Novos Dados
 
 ```python
-# Carregar modelo salvo
-best_model = pipeline.load_model('outputs/best_model.pkl')
+# Load saved model / Carregar modelo salvo
+best_model = pipeline.load_model("outputs/best_model.pkl")
 
-# Fazer predições
+# Make predictions / Fazer predições
 new_data = pd.DataFrame([[5.1, 3.5, 1.4, 0.2]], 
-                       columns=['sepal_length', 'sepal_width', 
-                               'petal_length', 'petal_width'])
+                       columns=["sepal_length", "sepal_width", 
+                               "petal_length", "petal_width"])
 prediction = best_model.predict(new_data)
 probability = best_model.predict_proba(new_data)
 
-print(f"Predição: {prediction[0]}")
-print(f"Probabilidades: {probability[0]}")
+print(f"Prediction: {prediction[0]}")
+print(f"Probabilities: {probability[0]}")
 ```
 
-## 📈 Visualizações Geradas
+## 📈 Generated Visualizations / Visualizações Geradas
 
-### 1. Análise Exploratória
-- Distribuições das variáveis
-- Matriz de correlação
-- Box plots para detecção de outliers
-- Gráficos de dispersão para relações entre variáveis
+### 1. Exploratory Analysis / Análise Exploratória
+- Variable distributions / Distribuições das variáveis
+- Correlation matrix / Matriz de correlação
+- Box plots for outlier detection / Box plots para detecção de outliers
+- Scatter plots for relationships between variables / Gráficos de dispersão para relações entre variáveis
 
-### 2. Avaliação de Modelos
-- Comparação de acurácias
-- Curvas ROC (para classificação binária)
-- Matrizes de confusão
-- Gráficos de validação cruzada
+### 2. Model Evaluation / Avaliação de Modelos
+- Accuracy comparison / Comparação de acurácias
+- ROC curves (for binary classification) / Curvas ROC (para classificação binária)
+- Confusion matrices / Matrizes de confusão
+- Cross-validation plots / Gráficos de validação cruzada
 
-### 3. Feature Analysis
-- Importância das features
-- Seleção de features
-- Análise de correlação com target
+### 3. Feature Analysis / Análise de Features
+- Feature importance / Importância das features
+- Feature selection / Seleção de features
+- Correlation analysis with target / Análise de correlação com target
 
-## ⚡ Performance e Otimização
+## ⚡ Performance and Optimization / Performance e Otimização
 
-### Métricas de Performance
+### Performance Metrics / Métricas de Performance
 
 ```python
 def performance_metrics(self):
     """
+    Calculates comprehensive performance metrics
     Calcula métricas abrangentes de performance
     """
     return {
-        'accuracy': self.accuracy_score,
-        'precision': self.precision_score,
-        'recall': self.recall_score,
-        'f1_score': self.f1_score,
-        'roc_auc': self.roc_auc_score,
-        'training_time': self.training_time,
-        'prediction_time': self.prediction_time
+        \'accuracy\': self.accuracy_score,
+        \'precision\': self.precision_score,
+        \'recall\': self.recall_score,
+        \'f1_score\': self.f1_score,
+        \'roc_auc\': self.roc_auc_score,
+        \'training_time\': self.training_time,
+        \'prediction_time\': self.prediction_time
     }
 ```
 
-### Otimizações Implementadas
+### Implemented Optimizations / Otimizações Implementadas
 
-- **Paralelização**: Uso de `n_jobs=-1` em operações que suportam
-- **Validação Eficiente**: Cross-validation otimizada
-- **Memory Management**: Limpeza automática de variáveis temporárias
-- **Caching**: Cache de resultados intermediários
+- **Parallelization**: Use of `n_jobs=-1` in supported operations / Uso de `n_jobs=-1` em operações que suportam
+- **Efficient Validation**: Optimized cross-validation / Cross-validation otimizada
+- **Memory Management**: Automatic temporary variable cleanup / Limpeza automática de variáveis temporárias
+- **Caching**: Caching of intermediate results / Cache de resultados intermediários
 
-## 🧪 Testes e Validação
+## 🧪 Tests and Validation / Testes e Validação
 
-### Executar Testes
+### Run Tests / Executar Testes
 
 ```bash
-# Testes unitários
+# Unit tests / Testes unitários
 python -m pytest tests/
 
-# Teste de integração
+# Integration test / Teste de integração
 python tests/test_integration.py
 
-# Teste de performance
+# Performance test / Teste de performance
 python tests/test_performance.py
 ```
 
-### Validação de Dados
+### Data Validation / Validação de Dados
 
 ```python
 def validate_data(self, data):
     """
+    Comprehensive validation of input data
     Validação abrangente dos dados de entrada
     """
     validations = {
@@ -340,26 +363,26 @@ def validate_data(self, data):
     return validations
 ```
 
-## 📊 Casos de Uso
+## 📊 Use Cases / Casos de Uso
 
-### 1. Classificação de Clientes
-- Segmentação de clientes por comportamento
-- Predição de churn
-- Análise de lifetime value
+### 1. Customer Classification / Classificação de Clientes
+- Customer segmentation by behavior / Segmentação de clientes por comportamento
+- Churn prediction / Predição de churn
+- Lifetime value analysis / Análise de lifetime value
 
-### 2. Análise Médica
-- Diagnóstico assistido por ML
-- Análise de exames laboratoriais
-- Predição de riscos
+### 2. Medical Analysis / Análise Médica
+- ML-assisted diagnosis / Diagnóstico assistido por ML
+- Laboratory exam analysis / Análise de exames laboratoriais
+- Risk prediction / Predição de riscos
 
-### 3. Análise Financeira
-- Detecção de fraudes
-- Análise de crédito
-- Predição de mercado
+### 3. Financial Analysis / Análise Financeira
+- Fraud detection / Detecção de fraudes
+- Credit analysis / Análise de crédito
+- Market prediction / Predição de mercado
 
-## 🔧 Configuração Avançada
+## 🔧 Advanced Configuration / Configuração Avançada
 
-### Arquivo de Configuração
+### Configuration File / Arquivo de Configuração
 
 ```python
 # config.py
@@ -381,7 +404,7 @@ VISUALIZATION_CONFIG = {
 }
 ```
 
-### Parâmetros de Modelos
+### Model Parameters / Parâmetros de Modelos
 
 ```python
 HYPERPARAMETER_GRIDS = {
@@ -399,8 +422,9 @@ HYPERPARAMETER_GRIDS = {
 }
 ```
 
-## 📄 Licença
+## 📄 License / Licença
 
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
 
 ## 👨‍💻 Autor
@@ -413,4 +437,11 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 ---
 
 ⭐ Se este projeto foi útil, considere deixar uma estrela!
+
+
+
+## 🙏 Acknowledgments / Agradecimentos
+
+Special thanks to all contributors and the open-source community for their invaluable support and resources.
+Um agradecimento especial a todos os contribuidores e à comunidade open-source pelo seu inestimável apoio e recursos.
 
