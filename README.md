@@ -1,6 +1,6 @@
 # Advanced Machine Learning Pipeline
 
-## 🖼️ Hero Image
+## 🖼️ Hero Image / Imagem de Destaque
 
 ![Hero Image](outputs/hero_image.png)
 
@@ -12,39 +12,34 @@
 ![Matplotlib](https://img.shields.io/badge/Matplotlib-11557c?style=flat&logo=matplotlib&logoColor=white)
 ![Seaborn](https://img.shields.io/badge/Seaborn-3776AB?style=flat&logo=python&logoColor=white)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![GitHub last commit](https://img.shields.io/github/last-commit/galafis/Advanced-ML-Pipeline)
+![GitHub issues](https://img.shields.io/github/issues/galafis/Advanced-ML-Pipeline)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/galafis/Advanced-ML-Pipeline)
+
+Um pipeline avançado de Machine Learning que automatiza todo o fluxo de trabalho de ML, desde o pré-processamento de dados até a avaliação de modelos. Este projeto demonstra técnicas avançadas de ciência de dados, incluindo análise exploratória automatizada, engenharia de features, comparação de modelos e otimização de hiperparâmetros.
 
 An advanced Machine Learning Pipeline that automates the entire ML workflow, from data preprocessing to model evaluation. This project demonstrates advanced data science techniques including automated exploratory analysis, feature engineering, model comparison, and hyperparameter optimization.
 
-Pipeline avançado de Machine Learning que automatiza todo o fluxo de trabalho ML, desde o pré-processamento de dados até a avaliação de modelos. Este projeto demonstra técnicas avançadas de ciência de dados incluindo análise exploratória automatizada, engenharia de features, comparação de modelos e otimização de hiperparâmetros.
-
 ## 🎯 Overview / Visão Geral
+
+Um sistema completo de Machine Learning que implementa as melhores práticas da indústria para o desenvolvimento de modelos preditivos, oferecendo automação de ponta a ponta com análise exploratória, engenharia de features, treinamento de múltiplos algoritmos e avaliação robusta de performance.
 
 A complete Machine Learning system that implements industry best practices for predictive model development, offering end-to-end automation with exploratory analysis, feature engineering, training of multiple algorithms, and robust performance evaluation.
 
-Sistema completo de Machine Learning que implementa as melhores práticas da indústria para desenvolvimento de modelos preditivos, oferecendo automação end-to-end com análise exploratória, feature engineering, treinamento de múltiplos algoritmos e avaliação robusta de performance.
-
 ### ✨ Key Features / Características Principais
 
-- **🔍 Automated EDA**: Comprehensive exploratory analysis with professional visualizations
-- **⚙️ Feature Engineering**: Automatic feature selection and transformation
-- **🤖 Model Comparison**: Multiple algorithms (Random Forest, Gradient Boosting, Logistic Regression, SVM)
-- **📊 Cross-Validation**: Robust evaluation with k-fold cross-validation
-- **🎛️ Hyperparameter Optimization**: Automatic search with GridSearchCV
-- **📈 Professional Visualizations**: Performance graphs and data insights
-- **💾 Model Persistence**: Saving and loading of trained models
-
-- **🔍 EDA Automatizada**: Análise exploratória abrangente com visualizações profissionais
-- **⚙️ Feature Engineering**: Seleção e transformação automática de features
-- **🤖 Comparação de Modelos**: Múltiplos algoritmos (Random Forest, Gradient Boosting, Logistic Regression, SVM)
-- **📊 Validação Cruzada**: Avaliação robusta com k-fold cross-validation
-- **🎛️ Otimização de Hiperparâmetros**: Busca automática com GridSearchCV
-- **📈 Visualizações Profissionais**: Gráficos de performance e insights dos dados
-- **💾 Persistência de Modelos**: Salvamento e carregamento de modelos treinados
+- **🔍 Automated EDA / EDA Automatizada**: Análise exploratória abrangente com visualizações profissionais.
+- **⚙️ Feature Engineering / Engenharia de Features**: Seleção e transformação automática de features.
+- **🤖 Model Comparison / Comparação de Modelos**: Múltiplos algoritmos (Random Forest, Gradient Boosting, Logistic Regression, SVM).
+- **📊 Cross-Validation / Validação Cruzada**: Avaliação robusta com k-fold cross-validation.
+- **🎛️ Hyperparameter Optimization / Otimização de Hiperparâmetros**: Busca automática com GridSearchCV.
+- **📈 Professional Visualizations / Visualizações Profissionais**: Gráficos de performance e insights dos dados.
+- **💾 Model Persistence / Persistência de Modelos**: Salvamento e carregamento de modelos treinados.
 
 ## 🛠️ Technology Stack / Stack Tecnológico
 
 ### Core Libraries / Bibliotecas Principais
-- **Python 3.11**: Main language / Linguagem principal
+- **Python 3.11+**: Main language / Linguagem principal
 - **Scikit-learn**: Machine Learning Framework / Framework de Machine Learning
 - **Pandas**: Data manipulation and analysis / Manipulação e análise de dados
 - **NumPy**: Numerical computation / Computação numérica
@@ -68,6 +63,7 @@ Advanced-ML-Pipeline/
 ├── requirements.txt            # Project dependencies / Dependências do projeto
 ├── README.md                   # Documentation / Documentação
 ├── .gitignore                  # Git ignored files / Arquivos ignorados pelo Git
+├── config.py                   # Configuration settings / Configurações do projeto
 ├── data/                       # Input data (optional) / Dados de entrada (opcional)
 ├── outputs/                    # Generated results / Resultados gerados
 │   ├── eda_analysis.png        # EDA visualizations / Visualizações EDA
@@ -75,7 +71,7 @@ Advanced-ML-Pipeline/
 │   ├── feature_importance.png  # Feature importance / Importância das features
 │   └── best_model.pkl          # Best saved model / Melhor modelo salvo
 ├── notebooks/                  # Jupyter notebooks (optional) / Jupyter notebooks (opcional)
-└── tests/                      # Unit tests / Testes unitários
+└── tests/                      # Unit and integration tests / Testes unitários e de integração
 ```
 
 ## 🚀 Quick Start / Início Rápido
@@ -110,136 +106,61 @@ from ml_pipeline import MLPipeline
 import pandas as pd
 
 # Load your data / Carregue seus dados
-data = pd.read_csv(\'your_dataset.csv\')
+# Exemplo com dados de demonstração (Iris dataset)
+from sklearn.datasets import load_iris
+iris = load_iris()
+data = pd.DataFrame(iris.data, columns=iris.feature_names)
+data["target"] = iris.target
 
 # Initialize the pipeline / Inicialize o pipeline
 pipeline = MLPipeline()
 
 # Execute the complete pipeline / Execute o pipeline completo
-results = pipeline.run_pipeline(data, target_column=\'target\')
+# Certifique-se de que a coluna 'target' existe em seus dados
+results = pipeline.run_pipeline(data, target_column='target')
 
 # Visualize the results / Visualize os resultados
-pipeline.plot_results()
+pipeline.generate_report() # Gera e salva gráficos de avaliação
 ```
 
 ## 🔍 Detailed Functionalities / Funcionalidades Detalhadas
 
 ### 📊 Automated Exploratory Data Analysis / Análise Exploratória Automatizada
 
-```python
-def exploratory_data_analysis(self, data):
-    """
-    Performs comprehensive exploratory data analysis
-    Realiza análise exploratória abrangente dos dados
-    """
-    # Descriptive statistics / Estatísticas descritivas
-    summary_stats = data.describe()
-    
-    # Missing values analysis / Análise de valores ausentes
-    missing_analysis = data.isnull().sum()
-    
-    # Variable distributions / Distribuições das variáveis
-    self.plot_distributions(data)
-    
-    # Correlation matrix / Matriz de correlação
-    self.plot_correlation_matrix(data)
-    
-    # Outlier analysis / Análise de outliers
-    outliers = self.detect_outliers(data)
-    
-    return {
-        \'summary_stats\': summary_stats,
-        \'missing_values\': missing_analysis,
-        \'outliers\': outliers
-    }
-```
+O pipeline inclui uma fase de Análise Exploratória de Dados (EDA) automatizada, que gera estatísticas descritivas, analisa valores ausentes, visualiza distribuições de variáveis, matrizes de correlação e detecta outliers. Isso fornece uma compreensão profunda dos dados antes do treinamento do modelo.
+
+The pipeline includes an automated Exploratory Data Analysis (EDA) phase, which generates descriptive statistics, analyzes missing values, visualizes variable distributions, correlation matrices, and detects outliers. This provides a deep understanding of the data before model training.
 
 ### ⚙️ Advanced Feature Engineering / Engenharia de Features Avançada
 
-```python
-def feature_engineering(self, X, y):
-    """
-    Automated feature engineering
-    Engenharia de features automatizada
-    """
-    # Statistical-based feature selection / Seleção de features baseada em estatísticas
-    selector = SelectKBest(score_func=f_classif, k=\'all\')
-    X_selected = selector.fit_transform(X, y)
-    
-    # Normalization/Standardization / Normalização/Padronização
-    scaler = StandardScaler()
-    X_scaled = scaler.fit_transform(X_selected)
-    
-    # Polynomial feature creation (if applicable) / Criação de features polinomiais (se aplicável)
-    if X.shape[1] <= 10:  # Avoid dimensional explosion / Evitar explosão dimensional
-        poly_features = self.create_polynomial_features(X_scaled)
-        X_scaled = np.hstack([X_scaled, poly_features])
-    
-    return X_scaled, selector, scaler
-```
+Esta seção do pipeline lida com a seleção e transformação automática de features. Inclui seleção de features baseada em estatísticas (e.g., `SelectKBest`), normalização/padronização de dados (`StandardScaler`) e, se aplicável, criação de features polinomiais para capturar relações não lineares.
+
+This section of the pipeline handles automatic feature selection and transformation. It includes statistical-based feature selection (e.g., `SelectKBest`), data normalization/standardization (`StandardScaler`), and, if applicable, polynomial feature creation to capture non-linear relationships.
 
 ### 🤖 Model Comparison / Comparação de Modelos
 
-```python
-def compare_models(self, X, y):
-    """
-    Compares multiple ML algorithms
-    Compara múltiplos algoritmos de ML
-    """
-    results = {}
-    
-    for name, model in self.models.items():
-        # Cross-validation / Validação cruzada
-        cv_scores = cross_val_score(model, X, y, cv=5, scoring=\'accuracy\')
-        
-        # Training and evaluation / Treinamento e avaliação
-        model.fit(X_train, y_train)
-        y_pred = model.predict(X_test)
-        
-        results[name] = {
-            \'cv_mean\': cv_scores.mean(),
-            \'cv_std\': cv_scores.std(),
-            \'test_accuracy\': accuracy_score(y_test, y_pred),
-            \'classification_report\': classification_report(y_test, y_pred),
-            \'confusion_matrix\': confusion_matrix(y_test, y_pred)
-        }
-    
-    return results
-```
+O pipeline compara múltiplos algoritmos de Machine Learning, como Random Forest, Gradient Boosting, Regressão Logística e SVM. Cada modelo é avaliado usando validação cruzada (k-fold) e métricas de desempenho robustas para identificar o melhor modelo para o conjunto de dados.
+
+The pipeline compares multiple Machine Learning algorithms, such as Random Forest, Gradient Boosting, Logistic Regression, and SVM. Each model is evaluated using k-fold cross-validation and robust performance metrics to identify the best model for the dataset.
 
 ### 🎛️ Hyperparameter Optimization / Otimização de Hiperparâmetros
 
-```python
-def hyperparameter_tuning(self, model, param_grid, X, y):
-    """
-    Automatic hyperparameter optimization
-    Otimização automática de hiperparâmetros
-    """
-    grid_search = GridSearchCV(
-        estimator=model,
-        param_grid=param_grid,
-        cv=5,
-        scoring=\'accuracy\',
-        n_jobs=-1,
-        verbose=1
-    )
-    
-    grid_search.fit(X, y)
-    
-    return {
-        \'best_params\': grid_search.best_params_,
-        \'best_score\': grid_search.best_score_,
-        \'best_estimator\': grid_search.best_estimator_
-    }
-```
+Para garantir o desempenho ideal do modelo, o pipeline incorpora otimização automática de hiperparâmetros usando `GridSearchCV`. Isso busca sistematicamente a melhor combinação de hiperparâmetros para o modelo selecionado, melhorando sua acurácia e generalização.
+
+To ensure optimal model performance, the pipeline incorporates automatic hyperparameter optimization using `GridSearchCV`. This systematically searches for the best combination of hyperparameters for the selected model, improving its accuracy and generalization.
 
 ## 📊 Usage Examples / Exemplos de Uso
 
 ### 1. Complete Pipeline with Iris Dataset / Pipeline Completo com Dataset Iris
 
+Este exemplo demonstra como executar o pipeline completo usando o popular dataset Iris. Ele carrega os dados, inicializa o pipeline, executa todas as etapas (EDA, pré-processamento, treinamento, otimização) e gera um relatório de avaliação.
+
+This example demonstrates how to run the complete pipeline using the popular Iris dataset. It loads the data, initializes the pipeline, executes all steps (EDA, preprocessing, training, optimization), and generates an evaluation report.
+
 ```python
 from sklearn.datasets import load_iris
 from ml_pipeline import MLPipeline
+import pandas as pd
 
 # Load the dataset / Carregue o dataset
 iris = load_iris()
@@ -248,35 +169,65 @@ data["target"] = iris.target
 
 # Execute the pipeline / Execute o pipeline
 pipeline = MLPipeline()
-results = pipeline.run_complete_pipeline(data, "target")
+results = pipeline.run_pipeline(data, "target")
 
 # Results / Resultados
-print(f"Best model: {results["best_model_name"]}")
-print(f"Accuracy: {results["best_accuracy"]:.4f}")
+print(f"Best model: {pipeline.best_model_name}")
+print(f"Accuracy: {pipeline.best_score:.4f}")
+
+# Gerar e salvar gráficos de avaliação
+pipeline.generate_report()
 ```
 
 ### 2. Feature Importance Analysis / Análise de Importância de Features
 
+Após o treinamento do modelo, é possível analisar a importância das features para entender quais variáveis contribuem mais para as previsões do modelo. O pipeline pode gerar visualizações para essa análise.
+
+After model training, it's possible to analyze feature importance to understand which variables contribute most to the model's predictions. The pipeline can generate visualizations for this analysis.
+
 ```python
+# Assuming pipeline.run_pipeline has been executed
+# Supondo que pipeline.run_pipeline tenha sido executado
+
 # Get feature importance / Obter importância das features
-feature_importance = pipeline.get_feature_importance()
+# Este método precisa ser implementado na classe MLPipeline
+# feature_importance = pipeline.get_feature_importance()
 
 # Plot importance / Plotar importância
-pipeline.plot_feature_importance(feature_importance)
+# Este método precisa ser implementado na classe MLPipeline
+# pipeline.plot_feature_importance(feature_importance)
 ```
 
 ### 3. Predictions on New Data / Predições em Novos Dados
 
+O modelo treinado e otimizado pode ser salvo e posteriormente carregado para fazer previsões em novos dados. Isso demonstra a capacidade de implantação do pipeline.
+
+The trained and optimized model can be saved and later loaded to make predictions on new data. This demonstrates the deployment capability of the pipeline.
+
 ```python
+import pandas as pd
+from ml_pipeline import MLPipeline
+
+# Initialize pipeline to load model / Inicializar pipeline para carregar modelo
+pipeline = MLPipeline()
+
 # Load saved model / Carregar modelo salvo
-best_model = pipeline.load_model("outputs/best_model.pkl")
+best_model_data = pipeline.load_model("outputs/best_model.pkl")
+best_model = best_model_data["model"]
+scaler = best_model_data["scaler"]
+feature_selector = best_model_data["feature_selector"]
 
 # Make predictions / Fazer predições
 new_data = pd.DataFrame([[5.1, 3.5, 1.4, 0.2]], 
-                       columns=["sepal_length", "sepal_width", 
-                               "petal_length", "petal_width"])
-prediction = best_model.predict(new_data)
-probability = best_model.predict_proba(new_data)
+                       columns=["sepal length (cm)", "sepal width (cm)", 
+                               "petal length (cm)", "petal width (cm)"])
+
+# Aplicar as mesmas transformações de pré-processamento
+new_data_selected = feature_selector.transform(new_data)
+new_data_scaled = scaler.transform(new_data_selected)
+
+prediction = best_model.predict(new_data_scaled)
+probability = best_model.predict_proba(new_data_scaled)
 
 print(f"Prediction: {prediction[0]}")
 print(f"Probabilities: {probability[0]}")
@@ -284,105 +235,103 @@ print(f"Probabilities: {probability[0]}")
 
 ## 📈 Generated Visualizations / Visualizações Geradas
 
+O pipeline gera automaticamente várias visualizações para auxiliar na compreensão dos dados e na avaliação do modelo. Essas visualizações são salvas no diretório `outputs/`.
+
+The pipeline automatically generates various visualizations to aid in data understanding and model evaluation. These visualizations are saved in the `outputs/` directory.
+
 ### 1. Exploratory Analysis / Análise Exploratória
-- Variable distributions / Distribuições das variáveis
-- Correlation matrix / Matriz de correlação
-- Box plots for outlier detection / Box plots para detecção de outliers
-- Scatter plots for relationships between variables / Gráficos de dispersão para relações entre variáveis
+- **Variable distributions / Distribuições das variáveis**: Histogramas e gráficos de densidade para entender a forma dos dados.
+- **Correlation matrix / Matriz de correlação**: Mapa de calor mostrando a correlação entre as features.
+- **Box plots for outlier detection / Box plots para detecção de outliers**: Identificação visual de valores atípicos.
+- **Scatter plots for relationships between variables / Gráficos de dispersão para relações entre variáveis**: Visualização de padrões e clusters.
 
 ### 2. Model Evaluation / Avaliação de Modelos
-- Accuracy comparison / Comparação de acurácias
-- ROC curves (for binary classification) / Curvas ROC (para classificação binária)
-- Confusion matrices / Matrizes de confusão
-- Cross-validation plots / Gráficos de validação cruzada
+- **Accuracy comparison / Comparação de acurácias**: Gráficos de barras comparando o desempenho de diferentes modelos.
+- **ROC curves (for binary classification) / Curvas ROC (para classificação binária)**: Avaliação da capacidade de discriminação do modelo.
+- **Confusion matrices / Matrizes de confusão**: Detalhamento dos verdadeiros positivos, verdadeiros negativos, falsos positivos e falsos negativos.
+- **Cross-validation plots / Gráficos de validação cruzada**: Visualização da estabilidade do modelo através de diferentes folds.
 
 ### 3. Feature Analysis / Análise de Features
-- Feature importance / Importância das features
-- Feature selection / Seleção de features
-- Correlation analysis with target / Análise de correlação com target
+- **Feature importance / Importância das features**: Gráficos mostrando a contribuição de cada feature para o modelo.
+- **Feature selection / Seleção de features**: Visualização das features selecionadas e descartadas.
+- **Correlation analysis with target / Análise de correlação com target**: Como as features se relacionam com a variável alvo.
 
 ## ⚡ Performance and Optimization / Performance e Otimização
 
+O pipeline é projetado com foco em performance e otimização, utilizando técnicas como paralelização e gerenciamento eficiente de memória.
+
+The pipeline is designed with a focus on performance and optimization, utilizing techniques such as parallelization and efficient memory management.
+
 ### Performance Metrics / Métricas de Performance
 
-```python
-def performance_metrics(self):
-    """
-    Calculates comprehensive performance metrics
-    Calcula métricas abrangentes de performance
-    """
-    return {
-        \'accuracy\': self.accuracy_score,
-        \'precision\': self.precision_score,
-        \'recall\': self.recall_score,
-        \'f1_score\': self.f1_score,
-        \'roc_auc\': self.roc_auc_score,
-        \'training_time\': self.training_time,
-        \'prediction_time\': self.prediction_time
-    }
-```
+O pipeline calcula e reporta métricas de desempenho abrangentes para cada modelo, incluindo acurácia, precisão, recall, F1-score, ROC AUC, tempo de treinamento e tempo de predição.
+
+The pipeline calculates and reports comprehensive performance metrics for each model, including accuracy, precision, recall, F1-score, ROC AUC, training time, and prediction time.
 
 ### Implemented Optimizations / Otimizações Implementadas
 
-- **Parallelization**: Use of `n_jobs=-1` in supported operations / Uso de `n_jobs=-1` em operações que suportam
-- **Efficient Validation**: Optimized cross-validation / Cross-validation otimizada
-- **Memory Management**: Automatic temporary variable cleanup / Limpeza automática de variáveis temporárias
-- **Caching**: Caching of intermediate results / Cache de resultados intermediários
+- **Parallelization / Paralelização**: Uso de `n_jobs=-1` em operações suportadas para aproveitar múltiplos núcleos de CPU.
+- **Efficient Validation / Validação Eficiente**: Validação cruzada otimizada para reduzir o tempo de computação.
+- **Memory Management / Gerenciamento de Memória**: Limpeza automática de variáveis temporárias para otimizar o uso da memória.
+- **Caching / Cache**: Cache de resultados intermediários para evitar recálculos desnecessários.
 
 ## 🧪 Tests and Validation / Testes e Validação
 
+O projeto inclui um conjunto de testes para garantir a funcionalidade e a robustez do pipeline.
+
+The project includes a suite of tests to ensure the functionality and robustness of the pipeline.
+
 ### Run Tests / Executar Testes
+
+Para executar os testes, navegue até o diretório raiz do projeto e use os seguintes comandos:
+
+To run the tests, navigate to the project root directory and use the following commands:
 
 ```bash
 # Unit tests / Testes unitários
-python -m pytest tests/
+python -m pytest tests/test_pipeline.py
 
 # Integration test / Teste de integração
-python tests/test_integration.py
+python -m pytest tests/test_integration.py
 
 # Performance test / Teste de performance
-python tests/test_performance.py
+python -m pytest tests/test_performance.py
 ```
 
 ### Data Validation / Validação de Dados
 
-```python
-def validate_data(self, data):
-    """
-    Comprehensive validation of input data
-    Validação abrangente dos dados de entrada
-    """
-    validations = {
-        'shape_check': data.shape[0] > 0 and data.shape[1] > 0,
-        'missing_values': data.isnull().sum().sum(),
-        'data_types': data.dtypes.to_dict(),
-        'duplicates': data.duplicated().sum(),
-        'memory_usage': data.memory_usage(deep=True).sum()
-    }
-    
-    return validations
-```
+O pipeline incorpora validação abrangente dos dados de entrada para verificar a forma, valores ausentes, tipos de dados, duplicatas e uso de memória, garantindo a integridade dos dados antes do processamento.
+
+The pipeline incorporates comprehensive validation of input data to check for shape, missing values, data types, duplicates, and memory usage, ensuring data integrity before processing.
 
 ## 📊 Use Cases / Casos de Uso
 
+O pipeline de ML avançado é versátil e pode ser aplicado em uma variedade de domínios:
+
+The advanced ML pipeline is versatile and can be applied across a variety of domains:
+
 ### 1. Customer Classification / Classificação de Clientes
-- Customer segmentation by behavior / Segmentação de clientes por comportamento
-- Churn prediction / Predição de churn
-- Lifetime value analysis / Análise de lifetime value
+- **Customer segmentation by behavior / Segmentação de clientes por comportamento**: Agrupamento de clientes com base em seus padrões de compra e interação.
+- **Churn prediction / Predição de churn**: Identificação de clientes propensos a cancelar serviços.
+- **Lifetime value analysis / Análise de lifetime value**: Estimativa do valor total que um cliente trará ao longo de sua vida útil.
 
 ### 2. Medical Analysis / Análise Médica
-- ML-assisted diagnosis / Diagnóstico assistido por ML
-- Laboratory exam analysis / Análise de exames laboratoriais
-- Risk prediction / Predição de riscos
+- **ML-assisted diagnosis / Diagnóstico assistido por ML**: Apoio a médicos na identificação de doenças com base em dados clínicos.
+- **Laboratory exam analysis / Análise de exames laboratoriais**: Interpretação automatizada de resultados de exames.
+- **Risk prediction / Predição de riscos**: Avaliação do risco de desenvolvimento de certas condições de saúde.
 
 ### 3. Financial Analysis / Análise Financeira
-- Fraud detection / Detecção de fraudes
-- Credit analysis / Análise de crédito
-- Market prediction / Predição de mercado
+- **Fraud detection / Detecção de fraudes**: Identificação de transações financeiras suspeitas.
+- **Credit analysis / Análise de crédito**: Avaliação da capacidade de crédito de indivíduos ou empresas.
+- **Market prediction / Predição de mercado**: Previsão de tendências de mercado e movimentos de preços.
 
 ## 🔧 Advanced Configuration / Configuração Avançada
 
 ### Configuration File / Arquivo de Configuração
+
+O arquivo `config.py` centraliza todas as configurações do pipeline, permitindo fácil personalização de parâmetros como `random_state`, `test_size`, `cv_folds`, diretórios de saída e opções de verbosidade.
+
+The `config.py` file centralizes all pipeline configurations, allowing easy customization of parameters such as `random_state`, `test_size`, `cv_folds`, output directories, and verbosity options.
 
 ```python
 # config.py
@@ -405,6 +354,10 @@ VISUALIZATION_CONFIG = {
 ```
 
 ### Model Parameters / Parâmetros de Modelos
+
+As grades de hiperparâmetros para otimização são definidas em `config.py`, permitindo que os usuários especifiquem os intervalos de busca para diferentes modelos de ML, como Random Forest e Gradient Boosting.
+
+Hyperparameter grids for optimization are defined in `config.py`, allowing users to specify search ranges for different ML models, such as Random Forest and Gradient Boosting.
 
 ```python
 HYPERPARAMETER_GRIDS = {

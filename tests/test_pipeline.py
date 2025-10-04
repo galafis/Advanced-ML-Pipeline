@@ -6,7 +6,8 @@ Requer pytest instalado.
 
 import os
 import pytest
-from ml_pipeline import MLPipeline, ML_CONFIG
+from ml_pipeline import MLPipeline
+from config import ML_CONFIG
 
 def test_pipeline_execution_and_outputs():
     """
@@ -14,19 +15,14 @@ def test_pipeline_execution_and_outputs():
     """
     # Executa pipeline em modo sintético
     pipeline = MLPipeline()
-    data = pipeline.load_data(sample_data=True)
-    pipeline.exploratory_analysis()
-    pipeline.preprocess_data()
-    pipeline.train_models()
-    pipeline.hyperparameter_tuning()
-    pipeline.generate_report()
-    pipeline.save_model()
+    results = pipeline.run_pipeline() # Removido sample_data=True, pois run_pipeline já lida com isso
 
     # Verifica a criação dos artefatos em outputs/
-    output_dir = ML_CONFIG['output_dir']
+    output_dir = ML_CONFIG["output_dir"]
     artifacts = [
         "eda_analysis.png",
         "model_evaluation.png",
+        "feature_importance.png", # Adicionado para verificar a nova imagem
         "best_model.pkl"
     ]
     for artifact in artifacts:
@@ -34,6 +30,11 @@ def test_pipeline_execution_and_outputs():
         assert os.path.isfile(path), f"Arquivo esperado não encontrado: {path}"
 
     # Checa se a acurácia é válida
-    assert 0.0 <= pipeline.best_score <= 1.0, "Acurácia fora do intervalo esperado"
+    assert 0.0 <= results["best_accuracy"] <= 1.0, "Acurácia fora do intervalo esperado"
 
-    pytest.main([__file__, "-v"])
+    # Verifica se o melhor modelo foi identificado
+    assert results["best_model_name"] is not None, "Melhor modelo não identificado"
+
+    # Verifica se os resultados do pipeline foram retornados
+    assert "results" in results, "Resultados do pipeline não retornados"
+

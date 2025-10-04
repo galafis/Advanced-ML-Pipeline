@@ -129,3 +129,15 @@ data/
 models/
 logs/
 
+
+
+# Entradas específicas para este projeto
+data/*.csv
+data/*.json
+data/*.xlsx
+outputs/*.pkl
+outputs/*.png
+config_local.py
+notebooks/*
+!notebooks/.gitkeep
+

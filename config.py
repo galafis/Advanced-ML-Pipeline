@@ -14,7 +14,7 @@ ML_CONFIG = {
 VISUALIZATION_CONFIG = {
     'figure_size': (12, 8),
     'dpi': 300,
-    'style': 'seaborn-v0_8',
+	'style': 'whitegrid',
     'color_palette': 'viridis'
 }
 
