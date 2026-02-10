@@ -96,7 +96,6 @@ class MLPipeline:
         if self.data is None: raise ValueError("Data not loaded. Call load_data() first.")
 
         os.makedirs(ML_CONFIG['output_dir'], exist_ok=True)
-        plt.figure(figsize=VISUALIZATION_CONFIG["figure_size"], dpi=VISUALIZATION_CONFIG["dpi"])
         sns.set_style(VISUALIZATION_CONFIG["style"])
 
         fig, axes = plt.subplots(2, 2, figsize=VISUALIZATION_CONFIG['figure_size'])
@@ -380,9 +379,9 @@ def main():
     print("=" * 50)
     os.makedirs(ML_CONFIG['output_dir'], exist_ok=True)
     pipeline = MLPipeline()
-    
-    # Example with sample data
-    pipeline.run_pipeline(sample_data=True)
+
+    # Run with sample data (generated automatically when no data_frame/file_path is provided)
+    pipeline.run_pipeline()
 
     print("\nPipeline execution completed successfully!")
 

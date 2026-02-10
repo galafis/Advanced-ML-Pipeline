@@ -1,10 +1,5 @@
 # Advanced Machine Learning Pipeline
 
-## 🖼️ Hero Image / Imagem de Destaque
-
-![Hero Image](outputs/hero_image.png)
-
-
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
 ![Scikit-learn](https://img.shields.io/badge/Scikit--learn-F7931E?style=flat&logo=scikit-learn&logoColor=white)
 ![Pandas](https://img.shields.io/badge/Pandas-150458?style=flat&logo=pandas&logoColor=white)
@@ -117,10 +112,7 @@ pipeline = MLPipeline()
 
 # Execute the complete pipeline / Execute o pipeline completo
 # Certifique-se de que a coluna 'target' existe em seus dados
-results = pipeline.run_pipeline(data, target_column='target')
-
-# Visualize the results / Visualize os resultados
-pipeline.generate_report() # Gera e salva gráficos de avaliação
+results = pipeline.run_pipeline(data_frame=data, target_column='target')
 ```
 
 ## 🔍 Detailed Functionalities / Funcionalidades Detalhadas
@@ -169,14 +161,11 @@ data["target"] = iris.target
 
 # Execute the pipeline / Execute o pipeline
 pipeline = MLPipeline()
-results = pipeline.run_pipeline(data, "target")
+results = pipeline.run_pipeline(data_frame=data, target_column="target")
 
 # Results / Resultados
 print(f"Best model: {pipeline.best_model_name}")
 print(f"Accuracy: {pipeline.best_score:.4f}")
-
-# Gerar e salvar gráficos de avaliação
-pipeline.generate_report()
 ```
 
 ### 2. Feature Importance Analysis / Análise de Importância de Features
@@ -190,12 +179,10 @@ After model training, it's possible to analyze feature importance to understand 
 # Supondo que pipeline.run_pipeline tenha sido executado
 
 # Get feature importance / Obter importância das features
-# Este método precisa ser implementado na classe MLPipeline
-# feature_importance = pipeline.get_feature_importance()
+feature_importance = pipeline.get_feature_importance()
 
 # Plot importance / Plotar importância
-# Este método precisa ser implementado na classe MLPipeline
-# pipeline.plot_feature_importance(feature_importance)
+pipeline.plot_feature_importance(feature_importance)
 ```
 
 ### 3. Predictions on New Data / Predições em Novos Dados
@@ -212,7 +199,7 @@ from ml_pipeline import MLPipeline
 pipeline = MLPipeline()
 
 # Load saved model / Carregar modelo salvo
-best_model_data = pipeline.load_model("outputs/best_model.pkl")
+best_model_data = pipeline.load_model("best_model.pkl")
 best_model = best_model_data["model"]
 scaler = best_model_data["scaler"]
 feature_selector = best_model_data["feature_selector"]
@@ -272,8 +259,6 @@ The pipeline calculates and reports comprehensive performance metrics for each m
 
 - **Parallelization / Paralelização**: Uso de `n_jobs=-1` em operações suportadas para aproveitar múltiplos núcleos de CPU.
 - **Efficient Validation / Validação Eficiente**: Validação cruzada otimizada para reduzir o tempo de computação.
-- **Memory Management / Gerenciamento de Memória**: Limpeza automática de variáveis temporárias para otimizar o uso da memória.
-- **Caching / Cache**: Cache de resultados intermediários para evitar recálculos desnecessários.
 
 ## 🧪 Tests and Validation / Testes e Validação
 
@@ -300,9 +285,9 @@ python -m pytest tests/test_performance.py
 
 ### Data Validation / Validação de Dados
 
-O pipeline incorpora validação abrangente dos dados de entrada para verificar a forma, valores ausentes, tipos de dados, duplicatas e uso de memória, garantindo a integridade dos dados antes do processamento.
+O pipeline valida os dados de entrada verificando se a coluna alvo existe e se o DataFrame contém dados válidos antes de iniciar o processamento.
 
-The pipeline incorporates comprehensive validation of input data to check for shape, missing values, data types, duplicates, and memory usage, ensuring data integrity before processing.
+The pipeline validates input data by checking that the target column exists and that the DataFrame contains valid data before starting processing.
 
 ## 📊 Use Cases / Casos de Uso
 
@@ -348,7 +333,7 @@ ML_CONFIG = {
 VISUALIZATION_CONFIG = {
     'figure_size': (12, 8),
     'dpi': 300,
-    'style': 'seaborn-v0_8',
+    'style': 'whitegrid',
     'color_palette': 'viridis'
 }
 ```
