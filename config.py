@@ -29,5 +29,15 @@ HYPERPARAMETER_GRIDS = {
         'n_estimators': [100, 200],
         'learning_rate': [0.01, 0.1, 0.2],
         'max_depth': [3, 5, 7]
+    },
+    'Logistic Regression': {
+        'C': [0.01, 0.1, 1, 10],
+        'penalty': ['l1', 'l2'],
+        'solver': ['liblinear', 'saga']
+    },
+    'SVM': {
+        'C': [0.1, 1, 10],
+        'kernel': ['linear', 'rbf'],
+        'gamma': ['scale', 'auto']
     }
 }

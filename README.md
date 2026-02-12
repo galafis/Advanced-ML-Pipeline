@@ -7,9 +7,6 @@
 ![Matplotlib](https://img.shields.io/badge/Matplotlib-11557c?style=flat&logo=matplotlib&logoColor=white)
 ![Seaborn](https://img.shields.io/badge/Seaborn-3776AB?style=flat&logo=python&logoColor=white)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![GitHub last commit](https://img.shields.io/github/last-commit/galafis/Advanced-ML-Pipeline)
-![GitHub issues](https://img.shields.io/github/issues/galafis/Advanced-ML-Pipeline)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/galafis/Advanced-ML-Pipeline)
 
 Um pipeline avançado de Machine Learning que automatiza todo o fluxo de trabalho de ML, desde o pré-processamento de dados até a avaliação de modelos. Este projeto demonstra técnicas avançadas de ciência de dados, incluindo análise exploratória automatizada, engenharia de features, comparação de modelos e otimização de hiperparâmetros.
 
@@ -42,7 +39,6 @@ A complete Machine Learning system that implements industry best practices for p
 ### Visualization & Analysis / Visualização e Análise
 - **Matplotlib**: Static visualizations / Visualizações estáticas
 - **Seaborn**: Statistical visualizations / Visualizações estatísticas
-- **Plotly**: Interactive charts (optional) / Gráficos interativos (opcional)
 
 ### Model Development / Desenvolvimento de Modelos
 - **Random Forest**: Ensemble of decision trees / Ensemble de árvores de decisão
@@ -209,12 +205,12 @@ new_data = pd.DataFrame([[5.1, 3.5, 1.4, 0.2]],
                        columns=["sepal length (cm)", "sepal width (cm)", 
                                "petal length (cm)", "petal width (cm)"])
 
-# Aplicar as mesmas transformações de pré-processamento
-new_data_selected = feature_selector.transform(new_data)
-new_data_scaled = scaler.transform(new_data_selected)
+# Apply the same preprocessing transformations (scale, then select)
+new_data_scaled = scaler.transform(new_data)
+new_data_selected = feature_selector.transform(new_data_scaled)
 
-prediction = best_model.predict(new_data_scaled)
-probability = best_model.predict_proba(new_data_scaled)
+prediction = best_model.predict(new_data_selected)
+probability = best_model.predict_proba(new_data_selected)
 
 print(f"Prediction: {prediction[0]}")
 print(f"Probabilities: {probability[0]}")
@@ -230,18 +226,13 @@ The pipeline automatically generates various visualizations to aid in data under
 - **Variable distributions / Distribuições das variáveis**: Histogramas e gráficos de densidade para entender a forma dos dados.
 - **Correlation matrix / Matriz de correlação**: Mapa de calor mostrando a correlação entre as features.
 - **Box plots for outlier detection / Box plots para detecção de outliers**: Identificação visual de valores atípicos.
-- **Scatter plots for relationships between variables / Gráficos de dispersão para relações entre variáveis**: Visualização de padrões e clusters.
 
 ### 2. Model Evaluation / Avaliação de Modelos
 - **Accuracy comparison / Comparação de acurácias**: Gráficos de barras comparando o desempenho de diferentes modelos.
-- **ROC curves (for binary classification) / Curvas ROC (para classificação binária)**: Avaliação da capacidade de discriminação do modelo.
 - **Confusion matrices / Matrizes de confusão**: Detalhamento dos verdadeiros positivos, verdadeiros negativos, falsos positivos e falsos negativos.
-- **Cross-validation plots / Gráficos de validação cruzada**: Visualização da estabilidade do modelo através de diferentes folds.
 
 ### 3. Feature Analysis / Análise de Features
 - **Feature importance / Importância das features**: Gráficos mostrando a contribuição de cada feature para o modelo.
-- **Feature selection / Seleção de features**: Visualização das features selecionadas e descartadas.
-- **Correlation analysis with target / Análise de correlação com target**: Como as features se relacionam com a variável alvo.
 
 ## ⚡ Performance and Optimization / Performance e Otimização
 
@@ -251,9 +242,9 @@ The pipeline is designed with a focus on performance and optimization, utilizing
 
 ### Performance Metrics / Métricas de Performance
 
-O pipeline calcula e reporta métricas de desempenho abrangentes para cada modelo, incluindo acurácia, precisão, recall, F1-score, ROC AUC, tempo de treinamento e tempo de predição.
+O pipeline calcula e reporta métricas de desempenho para cada modelo, incluindo acurácia, precisão, recall e F1-score.
 
-The pipeline calculates and reports comprehensive performance metrics for each model, including accuracy, precision, recall, F1-score, ROC AUC, training time, and prediction time.
+The pipeline calculates and reports performance metrics for each model, including accuracy, precision, recall, and F1-score.
 
 ### Implemented Optimizations / Otimizações Implementadas
 
@@ -289,28 +280,7 @@ O pipeline valida os dados de entrada verificando se a coluna alvo existe e se o
 
 The pipeline validates input data by checking that the target column exists and that the DataFrame contains valid data before starting processing.
 
-## 📊 Use Cases / Casos de Uso
-
-O pipeline de ML avançado é versátil e pode ser aplicado em uma variedade de domínios:
-
-The advanced ML pipeline is versatile and can be applied across a variety of domains:
-
-### 1. Customer Classification / Classificação de Clientes
-- **Customer segmentation by behavior / Segmentação de clientes por comportamento**: Agrupamento de clientes com base em seus padrões de compra e interação.
-- **Churn prediction / Predição de churn**: Identificação de clientes propensos a cancelar serviços.
-- **Lifetime value analysis / Análise de lifetime value**: Estimativa do valor total que um cliente trará ao longo de sua vida útil.
-
-### 2. Medical Analysis / Análise Médica
-- **ML-assisted diagnosis / Diagnóstico assistido por ML**: Apoio a médicos na identificação de doenças com base em dados clínicos.
-- **Laboratory exam analysis / Análise de exames laboratoriais**: Interpretação automatizada de resultados de exames.
-- **Risk prediction / Predição de riscos**: Avaliação do risco de desenvolvimento de certas condições de saúde.
-
-### 3. Financial Analysis / Análise Financeira
-- **Fraud detection / Detecção de fraudes**: Identificação de transações financeiras suspeitas.
-- **Credit analysis / Análise de crédito**: Avaliação da capacidade de crédito de indivíduos ou empresas.
-- **Market prediction / Predição de mercado**: Previsão de tendências de mercado e movimentos de preços.
-
-## 🔧 Advanced Configuration / Configuração Avançada
+##  Advanced Configuration / Configuração Avançada
 
 ### Configuration File / Arquivo de Configuração
 
@@ -356,6 +326,16 @@ HYPERPARAMETER_GRIDS = {
         'n_estimators': [100, 200],
         'learning_rate': [0.01, 0.1, 0.2],
         'max_depth': [3, 5, 7]
+    },
+    'Logistic Regression': {
+        'C': [0.01, 0.1, 1, 10],
+        'penalty': ['l1', 'l2'],
+        'solver': ['liblinear', 'saga']
+    },
+    'SVM': {
+        'C': [0.1, 1, 10],
+        'kernel': ['linear', 'rbf'],
+        'gamma': ['scale', 'auto']
     }
 }
 ```
@@ -371,15 +351,4 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 
 - GitHub: [@galafis](https://github.com/galafis)
 - Email: gabrieldemetrios@gmail.com
-
----
-
-⭐ Se este projeto foi útil, considere deixar uma estrela!
-
-
-
-## 🙏 Acknowledgments / Agradecimentos
-
-Special thanks to all contributors and the open-source community for their invaluable support and resources.
-Um agradecimento especial a todos os contribuidores e à comunidade open-source pelo seu inestimável apoio e recursos.
 

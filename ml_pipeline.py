@@ -19,9 +19,10 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 from sklearn.feature_selection import SelectKBest, f_classif
+from sklearn.exceptions import ConvergenceWarning
 import warnings
 
-warnings.filterwarnings('ignore')
+warnings.filterwarnings('ignore', category=ConvergenceWarning)
 
 
 class MLPipeline:
@@ -134,16 +135,10 @@ class MLPipeline:
         plt.close()
         print("EDA visualizations saved as 'outputs/eda_analysis.png'")
 
-    def create_polynomial_features(self, X):
-        """
-        Cria features polinomiais a partir dos dados de entrada.
-        """
-        poly = PolynomialFeatures(degree=2, include_bias=False)
-        return poly.fit_transform(X)
-
-    def preprocess_data(self):
+    def preprocess_data(self, use_polynomial_features=False):
         """
         Executa separação, normalização e seleção de features nos dados.
+        Optionally generates polynomial features before selection.
         """
         print("=== Data Preprocessing ===")
         if self.data is None: raise ValueError("Data not loaded. Call load_data() first.")
@@ -165,14 +160,22 @@ class MLPipeline:
         self.X_train_scaled = self.scaler.fit_transform(self.X_train)
         self.X_test_scaled = self.scaler.transform(self.X_test)
 
+        # Optional polynomial feature generation
+        feature_names = X.columns
+        if use_polynomial_features:
+            poly = PolynomialFeatures(degree=2, include_bias=False)
+            self.X_train_scaled = poly.fit_transform(self.X_train_scaled)
+            self.X_test_scaled = poly.transform(self.X_test_scaled)
+            feature_names = poly.get_feature_names_out(feature_names)
+            print(f"Polynomial features generated: {self.X_train_scaled.shape[1]} total features")
+
         # Feature selection
-        # Initialize SelectKBest here, after potential one-hot encoding
         self.feature_selector = SelectKBest(f_classif, k=min(10, self.X_train_scaled.shape[1]))
         self.X_train_selected = self.feature_selector.fit_transform(self.X_train_scaled, self.y_train)
         self.X_test_selected = self.feature_selector.transform(self.X_test_scaled)
         
         selected_feature_indices = self.feature_selector.get_support(indices=True)
-        self.feature_names_selected = X.columns[selected_feature_indices]
+        self.feature_names_selected = np.array(feature_names)[selected_feature_indices]
 
         print(f"Selected {len(self.feature_names_selected)} best features: {list(self.feature_names_selected)}")
         print(f"Training set shape: {self.X_train_selected.shape}")
@@ -220,7 +223,7 @@ class MLPipeline:
             param_grid = HYPERPARAMETER_GRIDS[self.best_model_name]
             grid_search = GridSearchCV(
                 self.best_model, param_grid,
-                cv=3, scoring='accuracy',
+                cv=ML_CONFIG['cv_folds'], scoring='accuracy',
                 n_jobs=ML_CONFIG['n_jobs'])
             grid_search.fit(self.X_train_selected, self.y_train)
             self.tuned_model = grid_search.best_estimator_
@@ -244,7 +247,6 @@ class MLPipeline:
         if self.best_model is None: raise ValueError("No best model found. Call train_models() first.")
 
         os.makedirs(ML_CONFIG['output_dir'], exist_ok=True)
-        plt.figure(figsize=VISUALIZATION_CONFIG['figure_size'], dpi=VISUALIZATION_CONFIG['dpi'])
         sns.set_style(VISUALIZATION_CONFIG["style"])
         
         model_names = list(self.results.keys())
@@ -289,7 +291,12 @@ class MLPipeline:
             return pd.Series(self.best_model.feature_importances_, index=self.feature_names_selected)
         elif self.best_model and hasattr(self.best_model, 'coef_'):
             # For linear models, use absolute coefficients as importance
-            return pd.Series(np.abs(self.best_model.coef_[0]), index=self.feature_names_selected)
+            coef = self.best_model.coef_
+            if coef.ndim == 1:
+                importance = np.abs(coef)
+            else:
+                importance = np.mean(np.abs(coef), axis=0)
+            return pd.Series(importance, index=self.feature_names_selected)
         return None
 
     def plot_feature_importance(self, feature_importance):
@@ -346,14 +353,14 @@ class MLPipeline:
         print(f"Model '{model_data['model_name']}' loaded from '{path}'")
         return model_data
 
-    def run_pipeline(self, data_frame=None, file_path=None, target_column=None):
+    def run_pipeline(self, data_frame=None, file_path=None, target_column=None, use_polynomial_features=False):
         """
         Executa o pipeline completo de Machine Learning.
         """
         print("\nStarting Advanced Machine Learning Pipeline execution...")
         self.load_data(data_frame=data_frame, file_path=file_path, target_column=target_column, sample_data=(data_frame is None and file_path is None))
         self.exploratory_analysis()
-        self.preprocess_data()
+        self.preprocess_data(use_polynomial_features=use_polynomial_features)
         self.train_models()
         self.hyperparameter_tuning()
         self.generate_report()
