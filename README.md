@@ -1,299 +1,234 @@
-# 🤖 Advanced Ml Pipeline
+# Advanced ML Pipeline
 
-> End-to-end machine learning pipeline with automated feature engineering, hyperparameter tuning, model selection, and deployment. Supports scikit-learn, XGBoost, and deep learning.
+Pipeline de Machine Learning de ponta a ponta para tarefas de classificacao, com EDA automatizada, comparacao de modelos, tuning de hiperparametros e persistencia de modelos.
 
-[![Python](https://img.shields.io/badge/Python-3.12-3776AB.svg)](https://img.shields.io/badge/)
-[![NumPy](https://img.shields.io/badge/NumPy-1.26-013243.svg)](https://img.shields.io/badge/)
-[![Pandas](https://img.shields.io/badge/Pandas-2.2-150458.svg)](https://img.shields.io/badge/)
-[![scikit--learn](https://img.shields.io/badge/scikit--learn-1.4-F7931E.svg)](https://img.shields.io/badge/)
+[![Python](https://img.shields.io/badge/Python-3.9+-3776AB.svg)](https://python.org)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.2+-F7931E.svg)](https://scikit-learn.org)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-[English](#english) | [Português](#português)
+[Portugues](#portugues) | [English](#english)
+
+---
+
+## Portugues
+
+### Sobre
+
+Pipeline automatizado de Machine Learning para classificacao binaria ou multiclasse. Implementado em um unico modulo Python (`ml_pipeline.py`, ~400 linhas) com a classe `MLPipeline` que:
+
+- **EDA automatizada**: gera graficos de distribuicao do target, heatmap de correlacao, histogramas de features e box plots para deteccao de outliers
+- **Pre-processamento**: split treino/teste estratificado, normalizacao com StandardScaler, selecao de features com SelectKBest (ANOVA F), features polinomiais opcionais
+- **Treinamento comparativo**: treina 4 modelos (Random Forest, Gradient Boosting, Logistic Regression, SVM) com validacao cruzada k-fold
+- **Tuning automatico**: GridSearchCV no melhor modelo com grids configurados em `config.py`
+- **Avaliacao**: grafico comparativo de acuracia, matriz de confusao, classification report, grafico de importancia de features
+- **Persistencia**: salva/carrega modelo + scaler + seletor de features via pickle
+
+**Aviso:** Projeto educacional e de portfolio. Nao e um sistema de producao.
+
+### Arquitetura
+
+```mermaid
+graph TD
+    A["load_data()<br/>DataFrame / CSV / Sintetico"] --> B["exploratory_analysis()<br/>EDA 2x2: Target, Correlacao, Histograma, Box Plot"]
+    A --> C["preprocess_data()<br/>Split + Scaler + SelectKBest"]
+    C --> D["train_models()<br/>RF, GB, LR, SVM + Cross-Validation"]
+    D --> E["hyperparameter_tuning()<br/>GridSearchCV no melhor modelo"]
+    E --> F["generate_report()<br/>Comparacao + Confusion Matrix"]
+    E --> G["get_feature_importance()<br/>+ plot_feature_importance()"]
+    F --> H["save_model()<br/>Pickle: modelo + scaler + seletor"]
+```
+
+### Como Usar
+
+```bash
+# Clonar e instalar
+git clone https://github.com/galafis/Advanced-ML-Pipeline.git
+cd Advanced-ML-Pipeline
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+
+# Executar com dados sinteticos
+python ml_pipeline.py
+
+# Testes
+pytest tests/ -v
+```
+
+### Uso Programatico
+
+```python
+from ml_pipeline import MLPipeline
+
+# Com dados sinteticos
+pipeline = MLPipeline()
+results = pipeline.run_pipeline()
+
+# Com seus proprios dados
+import pandas as pd
+df = pd.read_csv("meus_dados.csv")
+pipeline = MLPipeline()
+results = pipeline.run_pipeline(data_frame=df, target_column="target")
+
+# Com features polinomiais
+results = pipeline.run_pipeline(use_polynomial_features=True)
+
+# Carregar modelo salvo
+model_data = pipeline.load_model("best_model.pkl")
+```
+
+### Estrutura do Projeto
+
+```
+Advanced-ML-Pipeline/
+├── ml_pipeline.py     # Classe MLPipeline (~400 linhas)
+├── config.py          # ML_CONFIG, VISUALIZATION_CONFIG, HYPERPARAMETER_GRIDS
+├── tests/
+│   ├── __init__.py
+│   ├── test_pipeline.py       # Teste end-to-end com verificacao de artefatos
+│   ├── test_integration.py    # Teste de integracao (todas as etapas)
+│   └── test_performance.py    # Teste de performance (<30s)
+├── data/              # Diretorio para datasets (vazio)
+├── notebooks/         # Diretorio para notebooks (vazio)
+├── outputs/           # Artefatos gerados: PNGs + modelo .pkl
+├── requirements.txt
+├── LICENSE
+└── README.md
+```
+
+### Outputs Gerados
+
+| Arquivo | Descricao |
+|---------|-----------|
+| `outputs/eda_analysis.png` | EDA: distribuicao do target, correlacao, histogramas, box plots |
+| `outputs/model_evaluation.png` | Comparacao de modelos + matriz de confusao |
+| `outputs/feature_importance.png` | Importancia das features do melhor modelo |
+| `outputs/best_model.pkl` | Modelo treinado + scaler + seletor de features |
+
+### Tecnologias
+
+| Tecnologia | Uso |
+|------------|-----|
+| **Python 3.9+** | Linguagem principal |
+| **scikit-learn** | Modelos, metricas, preprocessamento, GridSearchCV |
+| **pandas** | Manipulacao de dados |
+| **NumPy** | Computacao numerica |
+| **matplotlib** | Graficos de avaliacao |
+| **seaborn** | Heatmaps e estilos |
+
+### Limitacoes
+
+- Suporta apenas tarefas de classificacao (nao regressao)
+- Nao inclui API de servico, Dockerfile ou CI/CD
+- Feature engineering limitada a selecao (SelectKBest) e features polinomiais opcionais
+- Dados de exemplo sao sinteticos aleatorios
+- Nao implementa validacao cruzada temporal (para dados com dependencia temporal)
 
 ---
 
 ## English
 
-### 🎯 Overview
+### About
 
-**Advanced Ml Pipeline** is a production-grade Python application that showcases modern software engineering practices including clean architecture, comprehensive testing, containerized deployment, and CI/CD readiness.
+Automated Machine Learning pipeline for binary or multiclass classification. Implemented in a single Python module (`ml_pipeline.py`, ~400 lines) with the `MLPipeline` class that:
 
-The codebase comprises **633 lines** of source code organized across **6 modules**, following industry best practices for maintainability, scalability, and code quality.
+- **Automated EDA**: generates target distribution, correlation heatmap, feature histograms, and box plots for outlier detection
+- **Preprocessing**: stratified train/test split, StandardScaler normalization, SelectKBest (ANOVA F) feature selection, optional polynomial features
+- **Comparative training**: trains 4 models (Random Forest, Gradient Boosting, Logistic Regression, SVM) with k-fold cross-validation
+- **Automatic tuning**: GridSearchCV on the best model with grids configured in `config.py`
+- **Evaluation**: model comparison chart, confusion matrix, classification report, feature importance plot
+- **Persistence**: saves/loads model + scaler + feature selector via pickle
 
-### ✨ Key Features
+**Disclaimer:** Educational and portfolio project. Not a production system.
 
-- **🤖 ML Pipeline**: End-to-end machine learning workflow from data to deployment
-- **🔬 Feature Engineering**: Automated feature extraction and transformation
-- **📊 Model Evaluation**: Comprehensive metrics and cross-validation
-- **🚀 Model Serving**: Production-ready prediction API
-- **🔄 Data Pipeline**: Scalable ETL with parallel processing
-- **✅ Data Validation**: Schema validation and quality checks
-- **📊 Monitoring**: Pipeline health metrics and alerting
-- **🔧 Configurability**: YAML/JSON-based pipeline configuration
-
-### 🏗️ Architecture
+### Architecture
 
 ```mermaid
-graph LR
-    subgraph Input["📥 Data Sources"]
-        A[Stream Input]
-        B[Batch Input]
-    end
-    
-    subgraph Processing["⚙️ Processing Engine"]
-        C[Ingestion Layer]
-        D[Transformation Pipeline]
-        E[Validation & QA]
-    end
-    
-    subgraph Output["📤 Output"]
-        F[(Data Store)]
-        G[Analytics]
-        H[Monitoring]
-    end
-    
-    A --> C
-    B --> C
-    C --> D --> E
-    E --> F
-    E --> G
-    D --> H
-    
-    style Input fill:#e1f5fe
-    style Processing fill:#f3e5f5
-    style Output fill:#e8f5e9
+graph TD
+    A["load_data()<br/>DataFrame / CSV / Synthetic"] --> B["exploratory_analysis()<br/>EDA 2x2: Target, Correlation, Histogram, Box Plot"]
+    A --> C["preprocess_data()<br/>Split + Scaler + SelectKBest"]
+    C --> D["train_models()<br/>RF, GB, LR, SVM + Cross-Validation"]
+    D --> E["hyperparameter_tuning()<br/>GridSearchCV on best model"]
+    E --> F["generate_report()<br/>Comparison + Confusion Matrix"]
+    E --> G["get_feature_importance()<br/>+ plot_feature_importance()"]
+    F --> H["save_model()<br/>Pickle: model + scaler + selector"]
 ```
 
-### 🚀 Quick Start
-
-#### Prerequisites
-
-- Python 3.12+
-- pip (Python package manager)
-
-#### Installation
+### Usage
 
 ```bash
-# Clone the repository
+# Clone and install
 git clone https://github.com/galafis/Advanced-ML-Pipeline.git
 cd Advanced-ML-Pipeline
-
-# Create and activate virtual environment
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
+source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
+
+# Run with synthetic data
+python ml_pipeline.py
+
+# Tests
+pytest tests/ -v
 ```
 
-#### Running
+### Programmatic Usage
 
-```bash
-# Run the application
-python src/main.py
+```python
+from ml_pipeline import MLPipeline
+
+# With synthetic data
+pipeline = MLPipeline()
+results = pipeline.run_pipeline()
+
+# With your own data
+import pandas as pd
+df = pd.read_csv("my_data.csv")
+pipeline = MLPipeline()
+results = pipeline.run_pipeline(data_frame=df, target_column="target")
+
+# With polynomial features
+results = pipeline.run_pipeline(use_polynomial_features=True)
+
+# Load saved model
+model_data = pipeline.load_model("best_model.pkl")
 ```
 
-### 🧪 Testing
+### Generated Outputs
 
-```bash
-# Run all tests
-pytest
+| File | Description |
+|------|-------------|
+| `outputs/eda_analysis.png` | EDA: target distribution, correlation, histograms, box plots |
+| `outputs/model_evaluation.png` | Model comparison + confusion matrix |
+| `outputs/feature_importance.png` | Best model feature importance |
+| `outputs/best_model.pkl` | Trained model + scaler + feature selector |
 
-# Run with coverage report
-pytest --cov --cov-report=html
+### Technologies
 
-# Run specific test module
-pytest tests/test_main.py -v
+| Technology | Usage |
+|------------|-------|
+| **Python 3.9+** | Core language |
+| **scikit-learn** | Models, metrics, preprocessing, GridSearchCV |
+| **pandas** | Data manipulation |
+| **NumPy** | Numerical computing |
+| **matplotlib** | Evaluation charts |
+| **seaborn** | Heatmaps and styling |
 
-# Run with detailed output
-pytest -v --tb=short
-```
+### Limitations
 
-### 📁 Project Structure
-
-```
-Advanced-ML-Pipeline/
-├── data/
-├── notebooks/
-├── outputs/
-├── tests/         # Test suite
-│   ├── __init__.py
-│   ├── test_integration.py
-│   ├── test_performance.py
-│   └── test_pipeline.py
-├── LICENSE
-├── README.md
-├── config.py
-├── ml_pipeline.py
-└── requirements.txt
-```
-
-### 🛠️ Tech Stack
-
-| Technology | Description | Role |
-|------------|-------------|------|
-| **Python** | Core Language | Primary |
-| **NumPy** | Numerical computing | Framework |
-| **Pandas** | Data manipulation library | Framework |
-| **scikit-learn** | Machine learning library | Framework |
-
-### 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-### 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-### 👤 Author
-
-**Gabriel Demetrios Lafis**
-- GitHub: [@galafis](https://github.com/galafis)
-- LinkedIn: [Gabriel Demetrios Lafis](https://linkedin.com/in/gabriel-demetrios-lafis)
+- Supports classification tasks only (not regression)
+- Does not include a serving API, Dockerfile, or CI/CD
+- Feature engineering limited to selection (SelectKBest) and optional polynomial features
+- Sample data is random synthetic data
+- Does not implement time-series cross-validation (for temporally dependent data)
 
 ---
 
-## Português
-
-### 🎯 Visão Geral
-
-**Advanced Ml Pipeline** é uma aplicação Python de nível profissional que demonstra práticas modernas de engenharia de software, incluindo arquitetura limpa, testes abrangentes, implantação containerizada e prontidão para CI/CD.
-
-A base de código compreende **633 linhas** de código-fonte organizadas em **6 módulos**, seguindo as melhores práticas do setor para manutenibilidade, escalabilidade e qualidade de código.
-
-### ✨ Funcionalidades Principais
-
-- **🤖 ML Pipeline**: End-to-end machine learning workflow from data to deployment
-- **🔬 Feature Engineering**: Automated feature extraction and transformation
-- **📊 Model Evaluation**: Comprehensive metrics and cross-validation
-- **🚀 Model Serving**: Production-ready prediction API
-- **🔄 Data Pipeline**: Scalable ETL with parallel processing
-- **✅ Data Validation**: Schema validation and quality checks
-- **📊 Monitoring**: Pipeline health metrics and alerting
-- **🔧 Configurability**: YAML/JSON-based pipeline configuration
-
-### 🏗️ Arquitetura
-
-```mermaid
-graph LR
-    subgraph Input["📥 Data Sources"]
-        A[Stream Input]
-        B[Batch Input]
-    end
-    
-    subgraph Processing["⚙️ Processing Engine"]
-        C[Ingestion Layer]
-        D[Transformation Pipeline]
-        E[Validation & QA]
-    end
-    
-    subgraph Output["📤 Output"]
-        F[(Data Store)]
-        G[Analytics]
-        H[Monitoring]
-    end
-    
-    A --> C
-    B --> C
-    C --> D --> E
-    E --> F
-    E --> G
-    D --> H
-    
-    style Input fill:#e1f5fe
-    style Processing fill:#f3e5f5
-    style Output fill:#e8f5e9
-```
-
-### 🚀 Início Rápido
-
-#### Prerequisites
-
-- Python 3.12+
-- pip (Python package manager)
-
-#### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/galafis/Advanced-ML-Pipeline.git
-cd Advanced-ML-Pipeline
-
-# Create and activate virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-```
-
-#### Running
-
-```bash
-# Run the application
-python src/main.py
-```
-
-### 🧪 Testing
-
-```bash
-# Run all tests
-pytest
-
-# Run with coverage report
-pytest --cov --cov-report=html
-
-# Run specific test module
-pytest tests/test_main.py -v
-
-# Run with detailed output
-pytest -v --tb=short
-```
-
-### 📁 Estrutura do Projeto
-
-```
-Advanced-ML-Pipeline/
-├── data/
-├── notebooks/
-├── outputs/
-├── tests/         # Test suite
-│   ├── __init__.py
-│   ├── test_integration.py
-│   ├── test_performance.py
-│   └── test_pipeline.py
-├── LICENSE
-├── README.md
-├── config.py
-├── ml_pipeline.py
-└── requirements.txt
-```
-
-### 🛠️ Stack Tecnológica
-
-| Tecnologia | Descrição | Papel |
-|------------|-----------|-------|
-| **Python** | Core Language | Primary |
-| **NumPy** | Numerical computing | Framework |
-| **Pandas** | Data manipulation library | Framework |
-| **scikit-learn** | Machine learning library | Framework |
-
-### 🤝 Contribuindo
-
-Contribuições são bem-vindas! Sinta-se à vontade para enviar um Pull Request.
-
-### 📄 Licença
-
-Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
-
-### 👤 Autor
+## Autor / Author
 
 **Gabriel Demetrios Lafis**
 - GitHub: [@galafis](https://github.com/galafis)
 - LinkedIn: [Gabriel Demetrios Lafis](https://linkedin.com/in/gabriel-demetrios-lafis)
+
+## Licenca / License
+
+MIT License - see [LICENSE](LICENSE).
