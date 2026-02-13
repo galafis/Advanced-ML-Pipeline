@@ -1,21 +1,17 @@
 # Configuration file for Advanced ML Pipeline
-# This file contains all configuration settings for the ML pipeline
 
 ML_CONFIG = {
     'random_state': 42,
     'test_size': 0.2,
     'cv_folds': 5,
     'n_jobs': -1,
-    'verbose': True,
-    'save_models': True,
-    'output_dir': 'outputs/'
+    'output_dir': 'outputs/',
 }
 
 VISUALIZATION_CONFIG = {
     'figure_size': (12, 8),
     'dpi': 300,
     'style': 'whitegrid',
-    'color_palette': 'viridis'
 }
 
 HYPERPARAMETER_GRIDS = {
