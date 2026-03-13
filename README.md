@@ -5,6 +5,7 @@ Pipeline de Machine Learning de ponta a ponta para tarefas de classificacao, com
 [![Python](https://img.shields.io/badge/Python-3.9+-3776AB.svg)](https://python.org)
 [![scikit-learn](https://img.shields.io/badge/scikit--learn-1.2+-F7931E.svg)](https://scikit-learn.org)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg?logo=docker)](Dockerfile)
 
 [Portugues](#portugues) | [English](#english)
 
